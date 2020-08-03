@@ -888,23 +888,4 @@ class Parser extends Parsedown
 
         return $markup;
     }
-
-    protected static function escape($text, $allowQuotes = false)
-    {
-        return htmlentities($text, ($allowQuotes ? ENT_NOQUOTES : ENT_QUOTES) | ENT_HTML5  | ENT_DISALLOWED);
-    }
-    protected function unmarkedText($text)
-    {
-        if ($this->breaksEnabled)
-        {
-            $text = preg_replace('/[ ]*\n/', "\n", $text);
-        }
-        else
-        {
-            $text = preg_replace('/(?:[ ][ ]+|[ ]*\\\\)\n/', "\n", $text);
-            $text = str_replace(" \n", "\n", $text);
-        }
-
-        return self::escape($text);
-    }
 }
