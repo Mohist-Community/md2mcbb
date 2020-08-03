@@ -3,7 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Parser\Parser;
+use App\Parser\ParserShell;
 use Illuminate\Console\Command;
+use Symfony\Component\Console\Input\InputArgument;
 
 class Parse extends Command
 {
@@ -29,6 +31,8 @@ class Parse extends Command
     public function __construct()
     {
         parent::__construct();
+        $this->addArgument('input',InputArgument::OPTIONAL,'Input markdown file. set "-" to use stdin.',base_path('README.md'));
+        $this->addArgument('output',InputArgument::OPTIONAL,'Output bbcodde file. set "-" to use stdout.','-');
     }
 
     /**
@@ -38,6 +42,10 @@ class Parse extends Command
      */
     public function handle()
     {
-        echo (new Parser())->parse(file_get_contents(base_path('README.md')));
+        ParserShell::init([
+            __FILE__,
+            $this->input->getArgument('input'),
+            $this->input->getArgument('output'),
+        ]);
     }
 }
