@@ -45,7 +45,7 @@ class Parser extends Parsedown
 
                 foreach ($parts as $part)
                 {
-                    $shortage = 4 - mb_strlen($line, 'utf-8') % 4;
+                    $shortage = 4 - self::mb_strlen($line, 'utf-8') % 4;
 
                     $line .= str_repeat(' ', $shortage);
                     $line .= $part;
@@ -887,5 +887,24 @@ class Parser extends Parsedown
         }
 
         return $markup;
+    }
+
+    protected static function mb_strlen($str, $encoding = null)
+    {
+        $s = (string) $str;
+        $len = \strlen($s);
+        for ($i = 0, $j = 0; $i < $len; ++$i, ++$j) {
+            switch ($s[$i] & "\xF0") {
+                case "\xC0":
+                case "\xD0":
+                    break;
+                case "\xF0":
+                    ++$i;
+                case "\xE0":
+                    $i += 2;
+                    break;
+            }
+        }
+        return $j;
     }
 }
