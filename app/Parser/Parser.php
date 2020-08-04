@@ -12,7 +12,7 @@ use Parsedown;
 class Parser extends Parsedown
 {
     protected $textLevelElements = array(
-        'size', 'url', 'b', 'align', 'code','td','table','list','u'
+        'size', 'url', 'b', 'align', 'code','td','table','list','u','img'
     );
 
     /**
@@ -367,6 +367,32 @@ class Parser extends Parsedown
                 ),
             );
         }
+    }
+    protected function inlineImage($Excerpt)
+    {
+        if ( ! isset($Excerpt['text'][1]) or $Excerpt['text'][1] !== '[')
+        {
+            return;
+        }
+
+        $Excerpt['text']= substr($Excerpt['text'], 1);
+
+        $Link = $this->inlineLink($Excerpt);
+
+        if ($Link === null)
+        {
+            return;
+        }
+
+        $Inline = array(
+            'extent' => $Link['extent'] + 1,
+            'element' => array(
+                'name' => 'img',
+                'text' => $Link['element']['data']
+            ),
+        );
+
+        return $Inline;
     }
 
     /* Block Part. */
@@ -809,7 +835,12 @@ class Parser extends Parsedown
 
         if (isset($Element['data']))
         {
-                $markup .= '='.$Element['data'];
+            $markup .= '=';
+            if(is_array($Element['data'])){
+                $markup .= implode(',',$Element['data']);
+            }else{
+                $markup .= $Element['data'];
+            }
         }
         $permitRawHtml = false;
 
