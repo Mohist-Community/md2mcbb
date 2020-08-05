@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Parser\Extensions\TestParser;
 use App\Parser\Parser;
 use App\Parser\ParserShell;
 use Illuminate\Console\Command;
@@ -41,6 +42,7 @@ class Compiler extends Command
         $this->addClass(Parser::class);
         $this->addClass(ParserShell::class);
         $this->addClass(Parsedown::class);
+        $this->addClass(TestParser::class);
         $this->phar->setStub($this->getStub());
         $this->fileChmod($this->phar->getPath(), '-rwxrwxr-x');
         rename(base_path('md2mcbb.phar'),base_path('md2mcbb'));
