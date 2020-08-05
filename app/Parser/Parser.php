@@ -830,47 +830,48 @@ class Parser extends Parsedown
         {
             $Element = $this->sanitiseElement($Element);
         }
+        $markup = '';
+        $name=@$Element['name'];
+        if($name
+            && method_exists($this,'element'.ucfirst($name))
+            && !isset($Element['disableOverride'])){
+            return $this->{'element'.ucfirst($name)}($Element,$nonNestables,$parentElement);
+        }
+        if($name
+            && !isset($Element['noOpen'])) {
+            $markup .= '[' . $Element['name'];
 
-        $markup = '['.$Element['name'];
-
-        if (isset($Element['data']))
-        {
-            $markup .= '=';
-            if(is_array($Element['data'])){
-                $markup .= implode(',',$Element['data']);
-            }else{
-                $markup .= $Element['data'];
+            if (isset($Element['data'])) {
+                $markup .= '=';
+                if (is_array($Element['data'])) {
+                    $markup .= implode(',', $Element['data']);
+                } else {
+                    $markup .= $Element['data'];
+                }
             }
+            $markup .= ']';
         }
         $permitRawHtml = false;
-
-        if (isset($Element['text']))
-        {
+        if (isset($Element['text'])) {
             $text = $Element['text'];
-        }
-        // very strongly consider an alternative if you're writing an
-        // extension
-        elseif (isset($Element['rawHtml']))
-        {
+        } elseif (isset($Element['rawHtml'])) {
             $text = $Element['rawHtml'];
             $allowRawHtmlInSafeMode = isset($Element['allowRawHtmlInSafeMode']) && $Element['allowRawHtmlInSafeMode'];
             $permitRawHtml = !$this->safeMode || $allowRawHtmlInSafeMode;
         }
 
-        $markup .= ']';
 
-        if(isset($Element['noOpen'])
-            && $Element['noOpen']){
-            $markup='';
+        if (isset($Element['noOpen'])
+            && $Element['noOpen']) {
+            $markup = '';
         }
 
-        if(isset($Element['alignment'])){
+        if (isset($Element['alignment'])) {
             $alignment = $Element['alignment'];
-        }elseif (isset($parentElement['alignment'])){
+        } elseif (isset($parentElement['alignment'])) {
             $alignment = $parentElement['alignment'];
             $Element['alignment'] = $alignment;
         }
-
         if (isset($text))
         {
             if (!isset($Element['nonNestables']))
@@ -899,11 +900,11 @@ class Parser extends Parsedown
             }
 
         }
-        if(!(isset($Element['noClose'])
-            && $Element['noClose'])){
-            $markup .= '[/'.$Element['name'].']';
-            if(!in_array($Element['name'],$this->textLevelElements)){
-                $markup .= "\n";
+        if($name
+            && !isset($Element['noClose'])){
+                $markup .= '[/'.$Element['name'].']';
+                if(!in_array($Element['name'],$this->textLevelElements)){
+                    $markup .= "\n";
             }
         }
         return $markup;
