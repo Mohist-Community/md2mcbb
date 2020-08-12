@@ -12,3 +12,4 @@
 */
 
 Route::view("/", "index");
+Route::post("/bbcode", "BBCodeController@toBBCode")->name("bbcode.toBBCode");
