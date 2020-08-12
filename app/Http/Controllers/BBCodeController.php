@@ -18,7 +18,6 @@ class BBCodeController extends Controller
         }
 
         $parser = new TestParser();
-        $parser->setSafeMode(true);
         $bbcode = $parser->text($validation->validated()['markdown']);
         return response($bbcode);
     }
