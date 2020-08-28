@@ -80,7 +80,7 @@ class TestParser extends Parser
     protected function popHeader($level){
         $op = '';
         while(!$this->stack->isEmpty() && $this->stack->top() >= $level){
-            $op .= '[/align][/td][/tr][/table][/align]';
+            $op .= '[/align][/td][/tr][/table][/align]'."\n";
             $this->stack->pop();
         }
         return $op;
@@ -110,7 +110,7 @@ class TestParser extends Parser
                  */
                 $Block = [
                     'markup' => $this->popHeader($level)
-                        . '[table=98%,#B0C4DE][tr][td][align=left][size=24px]'
+                        . '[align=center][table=98%,#B0C4DE][tr][td][align=left][size=24px]'
                         . $this->iconList[$this->iconPoint++%count($this->iconList)]
                         . ' ' . $text.'[/size][/align][/td][/tr][/table]' . '[table=98%,#EEE8AA][tr][td][align=left]'
                 ];
@@ -138,10 +138,12 @@ class TestParser extends Parser
         }
     }
 
-    protected function lines(array $lines)
+    public function text($text)
     {
-        return parent::lines($lines).
-            $this->popHeader(0);
+        return '[align=center]'
+            . parent::text($text)
+            . $this->popHeader(0)
+            . '[/align]';
     }
 
     protected function elementSize(array $Element,$nonNestables = null,$parentElement = null){
