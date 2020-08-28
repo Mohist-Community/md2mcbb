@@ -2,6 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\Parser\Extensions\FifthParser;
+use App\Parser\Extensions\FirstParser;
+use App\Parser\Extensions\FourthParser;
+use App\Parser\Extensions\SecondParser;
+use App\Parser\Extensions\SlimParser;
 use App\Parser\Extensions\TestParser;
 use App\Parser\Parser;
 use App\Parser\ParserShell;
@@ -42,6 +47,11 @@ class Compiler extends Command
         $this->addClass(Parser::class);
         $this->addClass(ParserShell::class);
         $this->addClass(Parsedown::class);
+        $this->addClass(FifthParser::class);
+        $this->addClass(FirstParser::class);
+        $this->addClass(FourthParser::class);
+        $this->addClass(SecondParser::class);
+        $this->addClass(SlimParser::class);
         $this->addClass(TestParser::class);
         $this->phar->setStub($this->getStub());
         $this->fileChmod($this->phar->getPath(), '-rwxrwxr-x');
