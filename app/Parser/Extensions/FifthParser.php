@@ -5,82 +5,26 @@ namespace App\Parser\Extensions;
 use App\Parser\Parser;
 use SplStack;
 
-class TestParser extends Parser
+/**
+ * Class FifthParser
+ * @package App\Parser\Extensions
+ * @author 余音是只猫
+ * @link https://www.mcbbs.net/thread-934065-1-1.html
+ */
+class FifthParser extends Parser
 {
-    protected $iconList = [
-        '{:portal:}',
-        '{:beacon:}',
-        '{:barrier:}',
-        '{:crafting_table_top:}',
-        '{:crafting_table_front:}',
-        '{:furnace_front_off:}',
-        '{:furnace_front_on:}',
-        '{:enchanting_table_top:}',
-        '{:ladder:}',
-        '{:iron_bars:}',
-        '{:structure_block_data:}',
-        '{:structure_block:}',
-        '{:structure_block_corner:}',
-        '{:structure_block_save:}',
-        '{:tnt_side:}',
-        '{:structure_block_load:}',
-        '{:mob_spawner:}',
-        '{:mushroom_brown:}',
-        '{:mushroom_red:}',
-        '{:deadbush:}',
-        '{:nether_wart_stage:}',
-        '{:grass_side:}',
-        '{:grass_side_snowed:}',
-        '{:mycelium_side:}',
-        '{:dirt_podzol_side:}',
-        '{:grass_path_side:}',
-        '{:dirt:}',
-        '{:dirt_podzol_top:}',
-        '{:hay_block_side:}',
-        '{:glowstone:}',
-        '{:stonebrick_carved:}',
-        '{:bedrock:}',
-        '{:diamond_block:}',
-        '{:emerald_block:}',
-        '{:gold_block:}',
-        '{:stonebrick:}',
-        '{:mushroom_block_skin_brown:}',
-        '{:mushroom_block_skin_red:}',
-        '{:mushroom_block_inside:}',
-        '{:ice_packed:}',
-        '{:stonebrick_mossy:}',
-        '{:iron_ore:}',
-        '{:quartz_ore:}',
-        '{:gold_ore:}',
-        '{:lapis_ore:}',
-        '{:diamond_ore:}',
-        '{:redstone_ore:}',
-        '{:emerald_ore:}',
-        '{:coal_ore:}',
-        '{:pumpkin_face_on:}',
-        '{:stonebrick_cracked:}',
-        '{:endframe_top:}',
-        '{:coarse_dirt:}',
-        '{:melon_side:}',
-        '{:pumpkin_face_off:}',
-        '{:lava_still:}',
-        '{:magma:}',
-        '{:ice:}',
-        '{:water_still:}',
-        '{:Grid_Fire:}',
-    ];
-    protected $iconPoint = 0;
     /** @var SplStack $stack */
     protected $stack;
     public function __construct()
     {
-        shuffle($this->iconList);
         $this->stack=new SplStack();
     }
     protected function popHeader($level){
         $op = '';
         while(!$this->stack->isEmpty() && $this->stack->top() >= $level){
-            $op .= '[/align][/td][/tr][/table][/align]'."\n";
+            $op .= '[/b][/color][/size][/align][/td][/tr][/table]'
+                . '[/align][/td][/tr][/table]'
+                . '[/align][/td][/tr][/table]'."\n";
             $this->stack->pop();
         }
         return $op;
@@ -104,11 +48,13 @@ class TestParser extends Parser
             $text = trim($Line['text'], '# ');
             if($level <= 2) {
                 $Block = [
-                    'markup' => $this->popHeader($level)
-                        . '[align=center][table=98%,#B0C4DE][tr][td][align=left][size=24px]'
-                        . $this->iconList[$this->iconPoint++%count($this->iconList)]
-                        . ' ' .  $this->line($text).'[/size][/align][/td][/tr][/table]'
-                        . '[table=98%,#EEE8AA][tr][td][align=left]'
+                    'markup' => $this->popHeader(0)
+                        . '[table][tr=rgb(255,182,193)][td][align=left]'
+                        . '[table][tr=rgb(128,0,128)][td][align=center][size=6][color=#000000][b]'
+                        . ' ' . $this->line($text)
+                        .'[/b][/color][/size][/align][/td][/tr][/table][hr]'
+                        . '[table][tr=rgb(240,128,128)][td][align=left]'
+                        . '[table][tr=rgb(221,160,221)][td][align=center][size=4][color=#000000][b]'
                 ];
                 $this->stack->push($level);
             }else{

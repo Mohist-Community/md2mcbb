@@ -5,7 +5,13 @@ namespace App\Parser\Extensions;
 use App\Parser\Parser;
 use SplStack;
 
-class TestParser extends Parser
+/**
+ * Class FirstParser
+ * @package App\Parser\Extensions
+ * @author 余音是只猫
+ * @link https://www.mcbbs.net/thread-934065-1-1.html
+ */
+class FirstParser extends Parser
 {
     protected $iconList = [
         '{:portal:}',
@@ -80,7 +86,7 @@ class TestParser extends Parser
     protected function popHeader($level){
         $op = '';
         while(!$this->stack->isEmpty() && $this->stack->top() >= $level){
-            $op .= '[/align][/td][/tr][/table][/align]'."\n";
+            $op .= '[/b][/color][/size][/align][/align][/td][/tr][/table]'."\n";
             $this->stack->pop();
         }
         return $op;
@@ -105,10 +111,10 @@ class TestParser extends Parser
             if($level <= 2) {
                 $Block = [
                     'markup' => $this->popHeader($level)
-                        . '[align=center][table=98%,#B0C4DE][tr][td][align=left][size=24px]'
+                        . '[table][tr=#B0C4DE][td][align=center][size=4][color=#000000][b]'
                         . $this->iconList[$this->iconPoint++%count($this->iconList)]
-                        . ' ' .  $this->line($text).'[/size][/align][/td][/tr][/table]'
-                        . '[table=98%,#EEE8AA][tr][td][align=left]'
+                        . ' ' . $this->line($text) .'[/b][/color][/size][/align][/td][/tr][/table]'
+                        . '[table][tr=#B0E0E6][td][align=center][align=left][size=3][color=#000000][b]'
                 ];
                 $this->stack->push($level);
             }else{

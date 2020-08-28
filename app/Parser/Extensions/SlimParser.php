@@ -5,82 +5,24 @@ namespace App\Parser\Extensions;
 use App\Parser\Parser;
 use SplStack;
 
-class TestParser extends Parser
+/**
+ * Class SlimParser
+ * @package App\Parser\Extensions
+ * @author 爱心魔王FHC
+ * @link https://www.mcbbs.net/forum.php?mod=redirect&goto=findpost&ptid=1087617&pid=19176439
+ */
+class SlimParser extends Parser
 {
-    protected $iconList = [
-        '{:portal:}',
-        '{:beacon:}',
-        '{:barrier:}',
-        '{:crafting_table_top:}',
-        '{:crafting_table_front:}',
-        '{:furnace_front_off:}',
-        '{:furnace_front_on:}',
-        '{:enchanting_table_top:}',
-        '{:ladder:}',
-        '{:iron_bars:}',
-        '{:structure_block_data:}',
-        '{:structure_block:}',
-        '{:structure_block_corner:}',
-        '{:structure_block_save:}',
-        '{:tnt_side:}',
-        '{:structure_block_load:}',
-        '{:mob_spawner:}',
-        '{:mushroom_brown:}',
-        '{:mushroom_red:}',
-        '{:deadbush:}',
-        '{:nether_wart_stage:}',
-        '{:grass_side:}',
-        '{:grass_side_snowed:}',
-        '{:mycelium_side:}',
-        '{:dirt_podzol_side:}',
-        '{:grass_path_side:}',
-        '{:dirt:}',
-        '{:dirt_podzol_top:}',
-        '{:hay_block_side:}',
-        '{:glowstone:}',
-        '{:stonebrick_carved:}',
-        '{:bedrock:}',
-        '{:diamond_block:}',
-        '{:emerald_block:}',
-        '{:gold_block:}',
-        '{:stonebrick:}',
-        '{:mushroom_block_skin_brown:}',
-        '{:mushroom_block_skin_red:}',
-        '{:mushroom_block_inside:}',
-        '{:ice_packed:}',
-        '{:stonebrick_mossy:}',
-        '{:iron_ore:}',
-        '{:quartz_ore:}',
-        '{:gold_ore:}',
-        '{:lapis_ore:}',
-        '{:diamond_ore:}',
-        '{:redstone_ore:}',
-        '{:emerald_ore:}',
-        '{:coal_ore:}',
-        '{:pumpkin_face_on:}',
-        '{:stonebrick_cracked:}',
-        '{:endframe_top:}',
-        '{:coarse_dirt:}',
-        '{:melon_side:}',
-        '{:pumpkin_face_off:}',
-        '{:lava_still:}',
-        '{:magma:}',
-        '{:ice:}',
-        '{:water_still:}',
-        '{:Grid_Fire:}',
-    ];
-    protected $iconPoint = 0;
     /** @var SplStack $stack */
     protected $stack;
     public function __construct()
     {
-        shuffle($this->iconList);
         $this->stack=new SplStack();
     }
     protected function popHeader($level){
         $op = '';
         while(!$this->stack->isEmpty() && $this->stack->top() >= $level){
-            $op .= '[/align][/td][/tr][/table][/align]'."\n";
+            $op .= '[/color][/size][/font][/td][/tr][/table]';
             $this->stack->pop();
         }
         return $op;
@@ -104,11 +46,11 @@ class TestParser extends Parser
             $text = trim($Line['text'], '# ');
             if($level <= 2) {
                 $Block = [
-                    'markup' => $this->popHeader($level)
-                        . '[align=center][table=98%,#B0C4DE][tr][td][align=left][size=24px]'
-                        . $this->iconList[$this->iconPoint++%count($this->iconList)]
-                        . ' ' .  $this->line($text).'[/size][/align][/td][/tr][/table]'
-                        . '[table=98%,#EEE8AA][tr][td][align=left]'
+                    'markup' => $this->popHeader(0)
+                        . '[table=530,#d5b4ff][tr][td][align=center][b][color=Purple][font=微软雅黑][size=4]'
+                        . $this->line($text)
+                        . '[/size][/font][/color][/b][/align][/td][/tr][/table]'
+                        . '[table=530,#ecddff][tr][td][font=微软雅黑][size=3][color=DarkOrchid]'
                 ];
                 $this->stack->push($level);
             }else{
@@ -136,10 +78,12 @@ class TestParser extends Parser
 
     public function text($text)
     {
-        return '[align=center]'
+        $this->stack->push(1);
+        return '[align=center][table=550,#a024b5][tr][td][table=540,#d35de8][tr][td]'
+            . '[table=530,#ecddff][tr][td][font=微软雅黑][size=3][color=DarkOrchid]'
             . parent::text($text)
             . $this->popHeader(0)
-            . '[/align]';
+            . '[/td][/tr][/table][/td][/tr][/table][/align]';
     }
 
     protected function elementSize(array $Element,$nonNestables = null,$parentElement = null){
