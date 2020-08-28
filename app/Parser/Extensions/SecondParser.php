@@ -23,6 +23,7 @@ class SecondParser extends Parser
         $op = '';
         while(!$this->stack->isEmpty() && $this->stack->top() >= $level){
             $op .= '[/color][/td][/tr][/table][/align]'."\n";
+            $this->stack->pop();
         }
         return $op;
     }
