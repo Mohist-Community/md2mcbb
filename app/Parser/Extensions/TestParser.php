@@ -3,6 +3,7 @@
 namespace App\Parser\Extensions;
 
 use App\Parser\Parser;
+use SplStack;
 
 class TestParser extends Parser
 {
@@ -69,11 +70,21 @@ class TestParser extends Parser
         '{:Grid_Fire:}',
     ];
     protected $iconPoint = 0;
+    /** @var SplStack $stack */
+    protected $stack;
     public function __construct()
     {
         shuffle($this->iconList);
+        $this->stack=new SplStack();
     }
-
+    protected function popHeader($level){
+        $op = '';
+        while(!$this->stack->isEmpty() && $this->stack->top() >= $level){
+            $op .= '[/align][/td][/tr][/table][/align]';
+            $this->stack->pop();
+        }
+        return $op;
+    }
     protected function blockHeader($Line)
     {
         if (isset($Line['text'][1]))
@@ -92,43 +103,18 @@ class TestParser extends Parser
 
             $text = trim($Line['text'], '# ');
             if($level <= 2) {
+                /**
+                 * [align=center][table=98%,#B0C4DE][tr][td][align=left][size=24px]{:stonebrick_mossy:} h1[/size][/align][/td][/tr]
+                [/table][table=98%,#EEE8AA][tr][td][align=left]正文[/align][/td][/tr]
+                [/table][/align]
+                 */
                 $Block = [
-                    'level' => $level,
-                    'element' => [
-                        'name' => 'align',
-                        'text' => [
-                            [
-                                'name' => 'table',
-                                'text' => [
-                                    'name' => 'tr',
-                                    'handler' => 'element',
-                                    'text' => [
-                                        'name' => 'td',
-                                        'handler' => 'element',
-                                        'text' => [
-                                            'name' => 'align',
-                                            'text' => [
-                                                'name' => 'size',
-                                                'text' => $this->iconList[$this->iconPoint++%count($this->iconList)].' '.$text,
-                                                'handler' => 'line',
-                                                'data' => min(8 - $level, 6),
-                                            ],
-                                            'handler' => 'element',
-                                            'data' => 'left',
-                                        ],
-                                    ]
-                                ],
-                                'handler' => 'element',
-                                'data' => [
-                                    '98%',
-                                    '#B0C4DE',
-                                ],
-                            ]
-                        ],
-                        'handler' => 'elements',
-                        'data' => 'center',
-                    ],
+                    'markup' => $this->popHeader($level)
+                        . '[table=98%,#B0C4DE][tr][td][align=left][size=24px]'
+                        . $this->iconList[$this->iconPoint++%count($this->iconList)]
+                        . ' ' . $text.'[/size][/align][/td][/tr][/table]' . '[table=98%,#EEE8AA][tr][td][align=left]'
                 ];
+                $this->stack->push($level);
             }else{
                 $Block = [
                     'element' => [
@@ -151,58 +137,13 @@ class TestParser extends Parser
             return $Block;
         }
     }
-    protected function blockHeaderContinue($Line, $Block)
-    {
-        if(!isset($Block['level'])){
-            return;
-        }
-        if (isset($Line['text'][1])
-            && $Line['text'][0] == '#')
-        {
-            $level = 1;
 
-            while (isset($Line['text'][$level]) and $Line['text'][$level] === '#')
-            {
-                $level ++;
-            }
-            if($level == $Block['level']){
-                return;
-            }
-        }
-        if(!isset($Block['element']['text'][1])){
-            $Block['element']['text'][1] = [
-                'name' => 'table',
-                'text' => [
-                    'name' => 'tr',
-                    'handler' => 'element',
-                    'text' => [
-                        'name' => 'td',
-                        'handler' => 'element',
-                        'text' => [
-                            'name' => 'align',
-                            'text' => (array) $Line['body'],
-                            'handler' => 'lines',
-                            'data' => 'left',
-                        ],
-                    ]
-                ],
-                'handler' => 'element',
-                'data' => [
-                    '98%',
-                    '#EEE8AA',
-                ],
-            ];
-        }else{
-            $Block['element']['text'][1]['text']['text']['text']['text'][] = $Line['body'];
-        }
-        return $Block;
+    protected function lines(array $lines)
+    {
+        return parent::lines($lines).
+            $this->popHeader(0);
     }
-    protected function blockHeaderComplete($Block){
-        $Block['element']['text'][]=[
-            'text'=>"\n"
-        ];
-        return $Block;
-    }
+
     protected function elementSize(array $Element,$nonNestables = null,$parentElement = null){
         switch (@$Element['data']){
             case 7:
