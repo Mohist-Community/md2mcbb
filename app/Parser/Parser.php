@@ -14,6 +14,18 @@ class Parser extends Parsedown
     protected $textLevelElements = array(
         'size', 'url', 'b', 'align', 'code','td','table','list','u','img'
     );
+    protected $InlineTypes = array(
+        '!' => array('Image'),
+        '&' => array('SpecialCharacter'),
+        '*' => array('Emphasis'),
+        ':' => array('Url'),
+        '<' => array('UrlTag', 'EmailTag', 'Markup'),
+        '[' => array('Link'),
+        '_' => array('Emphasis'),
+        '`' => array('Code'),
+        '~' => array('Strikethrough'),
+        '\\' => array('EscapeSequence'),
+    );
 
     /**
      * Inline Part.
@@ -666,6 +678,14 @@ class Parser extends Parsedown
         return $Block;
     }
 
+    /* >a                       *
+     * >>b                      *
+     * >c                       */
+    protected function blockQuote($Line){}
+
+    /* <h1>hi</h1>              */
+    protected function blockMarkup($Line){}
+
     /* | aa | bbb |             *
      * | -- | --: |             *
      * | cc | ddd |             **/
@@ -938,5 +958,15 @@ class Parser extends Parsedown
             }
         }
         return $j;
+    }
+
+    protected static function escape($text, $allowQuotes = false)
+    {
+        return str_replace('[','[[img=1,0]static/image/hrline/line8.png[/img]',$text);
+    }
+
+    protected function unmarkedText($text)
+    {
+        return str_replace('[','[[img=1,0]static/image/hrline/line8.png[/img]',$text);
     }
 }
