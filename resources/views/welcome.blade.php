@@ -64,6 +64,9 @@
                 @endforeach
             </div>
         </div>
+        @if(env('ICP',null))
+            <a href="https://beian.miit.gov.cn/">{{ env('ICP') }}</a>
+        @endif
     </div>
 </div>
 </body>
