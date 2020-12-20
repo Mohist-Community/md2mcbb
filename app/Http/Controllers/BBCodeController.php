@@ -55,6 +55,6 @@ class BBCodeController extends Controller
         }
         $parser = new $class();
         $bbcode = $parser->text($input['markdown']);
-        return $bbcode;
+        return response($bbcode);
     }
 }

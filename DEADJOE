@@ -1,0 +1,122 @@
+
+*** These modified files were found in JOE when it aborted on Sun Dec 20 20:11:05 2020
+*** JOE was aborted because the terminal closed
+
+*** File '(Unnamed)'
+/www/wwwroot/md2mcbb/.git/COMMIT_EDITMSG
+
+*** File '/www/wwwroot/md2mcbb/.git/COMMIT_EDITMSG'
+
+# Ple the commit message for your chan as    . Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Committer: root <root@node-3.novalocal>
+#
+# On branch master
+# Your branch is up to date with 'origin/master'.
+#
+# Changes to be committed:
+#	modified:   .editorconfig
+#	modified:   .env.example
+#	modified:   .gitattributes
+#	modified:   .gitignore
+#	new file:   .htaccess
+#	modified:   .idea/workspace.xml
+#	modified:   .styleci.yml
+#	new file:   404.html
+#	modified:   app/Console/Kernel.php
+#	modified:   app/Exceptions/Handler.php
+#	modified:   app/Http/Controllers/BBCodeController.php
+#	modified:   app/Http/Controllers/Controller.php
+#	modified:   app/Http/Kernel.php
+#	modified:   app/Http/Middleware/Authenticate.php
+#	modified:   app/Http/Middleware/EncryptCookies.php
+#	modified:   app/Http/Middleware/PreventRequestsDuringMaintenance.php
+#	modified:   app/Http/Middleware/RedirectIfAuthenticated.php
+#	modified:   app/Http/Middleware/TrimStrings.php
+#	modified:   app/Http/Middleware/TrustHosts.php
+#	modified:   app/Http/Middleware/TrustProxies.php
+#	modified:   app/Http/Middleware/VerifyCsrfToken.php
+#	modified:   app/Models/User.php
+#	modified:   app/Parser/Extensions/FifthParser.php
+#	modified:   app/Parser/Extensions/FirstParser.php
+#	modified:   app/Parser/Extensions/FourthParser.php
+#	modified:   app/Parser/Extensions/PlainParser.php
+#	modified:   app/Parser/Extensions/SecondParser.php
+#	modified:   app/Parser/Extensions/SlimParser.php
+#	modified:   app/Parser/Extensions/TestParser.php
+#	modified:   app/Parser/Parser.php
+#	modified:   app/Parser/ParserShell.php
+#	modified:   app/Providers/AppServiceProvider.php
+#	modified:   app/Providers/AuthServiceProvider.php
+#	modified:   app/Providers/BroadcastServiceProvider.php
+#	modified:   app/Providers/EventServiceProvider.php
+#	modified:   app/Providers/RouteServiceProvider.php
+#	modified:   artisan
+#	modified:   bootstrap/app.php
+#	modified:   bootstrap/cache/.gitignore
+#	modified:   composer.json
+#	modified:   composer.lock
+#	modified:   config/app.php
+#	modified:   config/auth.php
+#	modified:   config/broadcasting.php
+#	modified:   config/cache.php
+#	modified:   config/cors.php
+#	modified:   config/database.php
+#	modified:   config/filesystems.php
+#	modified:   config/hashing.php
+#	modified:   config/logging.php
+#	modified:   config/mail.php
+#	modified:   config/queue.php
+#	modified:   config/services.php
+#	modified:   config/session.php
+#	modified:   config/view.php
+#	modified:   database/.gitignore
+#	modified:   database/factories/UserFactory.php
+#	modified:   database/migrations/2014_10_12_000000_create_users_table.php
+#	modified:   database/migrations/2014_10_12_100000_create_password_resets_table.php
+#	modified:   database/migrations/2019_08_19_000000_create_failed_jobs_table.php
+#	modified:   database/seeders/DatabaseSeeder.php
+#	modified:   docker-compose.yml
+#	new file:   index.html
+#	modified:   phpunit.xml
+#	modified:   public/.htaccess
+#	new file:   public/.user.ini
+#	modified:   public/favicon.ico
+#	modified:   public/index.php
+#	modified:   public/robots.txt
+#	modified:   public/web.config
+#	modified:   resources/css/app.css
+#	modified:   resources/js/app.js
+#	modified:   resources/js/bootstrap.js
+#	modified:   resources/lang/en/auth.php
+#	modified:   resources/lang/en/pagination.php
+#	modified:   resources/lang/en/passwords.php
+#	modified:   resources/lang/en/validation.php
+#	modified:   resources/views/input.blade.php
+#	modified:   resources/views/welcome.blade.php
+#	modified:   routes/api.php
+#	modified:   routes/channels.php
+#	modified:   routes/console.php
+#	modified:   routes/web.php
+#	modified:   server.php
+#	modified:   storage/app/.gitignore
+#	modified:   storage/app/public/.gitignore
+#	modified:   storage/framework/.gitignore
+#	modified:   storage/framework/cache/.gitignore
+#	modified:   storage/framework/cache/data/.gitignore
+#	modified:   storage/framework/sessions/.gitignore
+#	modified:   storage/framework/testing/.gitignore
+#	modified:   storage/framework/views/.gitignore
+#	modified:   storage/logs/.gitignore
+#	modified:   tests/CreatesApplication.php
+#	modified:   tests/Feature/ExampleTest.php
+#	modified:   tests/TestCase.php
+#	modified:   tests/Unit/ExampleTest.php
+#
+
+*** File '* Startup Log *'
+Processing '/etc/joe/editorrc'...
+Processing '/etc/joe/ftyperc'...
+Finished processing /etc/joe/ftyperc
+Finished processing /etc/joe/editorrc
