@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,5 +13,6 @@
 |
 */
 
-Route::view("/", "index");
-Route::post("/bbcode", "BBCodeController@toBBCode")->name("bbcode.toBBCode");
+Route::get('/', [\App\Http\Controllers\BBCodeController::class,'index'])->name('welcome');
+Route::get('/{parser}',[\App\Http\Controllers\BBCodeController::class,'input'])->name('input');
+Route::post('/{parser}',[\App\Http\Controllers\BBCodeController::class,'parser'])->name('parser');

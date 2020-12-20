@@ -6,9 +6,8 @@ use App\Parser\Parser;
 use SplStack;
 
 /**
- * Class FourthParser
- * @package App\Parser\Extensions
  * @author 余音是只猫
+ *
  * @link https://www.mcbbs.net/thread-934065-1-1.html
  */
 class FourthParser extends Parser

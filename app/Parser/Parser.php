@@ -7,7 +7,6 @@ use Parsedown;
 /**
  * Class Parser
  * @package App\Parser
- * @link \App\Console\Commands\Parse
  */
 class Parser extends Parsedown
 {

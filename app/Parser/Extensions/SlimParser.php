@@ -6,9 +6,8 @@ use App\Parser\Parser;
 use SplStack;
 
 /**
- * Class SlimParser
- * @package App\Parser\Extensions
  * @author 爱心魔王FHC
+ *
  * @link https://www.mcbbs.net/forum.php?mod=redirect&goto=findpost&ptid=1087617&pid=19176439
  */
 class SlimParser extends Parser

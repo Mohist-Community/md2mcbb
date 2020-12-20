@@ -1,87 +1,62 @@
-# md2mcbb
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-将markdown转换为mcbbs bbcode并加以美化的程序
+<p align="center">
+<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-## 优势
+## About Laravel
 
-- 非简易标签的替换
-- 在转换的过程中加以美化
-- 提供多种模板供选用
-- 对markdown语法支持较为全面
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-## 劣势
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-- 对于markdown出现html代码的情况无支持
-- mcbbs引用无法多层，不作处理
-- mcbbs的 [code] 代码块中不能出现 [/code] ，导致markdown代码块中不能出现 [/code] ，目前未找到解决方案
-- 对 [ 字符转码使用添加不可见图片的方式，在复制时可能会显现
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## 如何使用？
+## Learning Laravel
 
-打开运行站
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-![](https://s1.ax1x.com/2020/08/28/dTm9sO.md.png)
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-将代码复制到mcbbs
+## Laravel Sponsors
 
-![](https://s1.ax1x.com/2020/08/28/dTnP10.md.png)
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-## 如何安装？
+### Premium Partners
 
-````shell script
-git clone https://github.com/Mohist-Community/md2mcbb.git
-cp .env.example .env
-composer install
-````
+- **[Vehikl](https://vehikl.com/)**
+- **[Tighten Co.](https://tighten.co)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Cubet Techno Labs](https://cubettech.com)**
+- **[Cyber-Duck](https://cyber-duck.co.uk)**
+- **[Many](https://www.many.co.uk)**
+- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
+- **[DevSquad](https://devsquad.com)**
+- **[Curotec](https://www.curotec.com/)**
+- **[OP.GG](https://op.gg)**
 
-（和其他laravel程序一样的啦~只不够这个不用配置数据库
+## Contributing
 
-## 二进制版本如何使用？
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-二进制版本仍需php环境（版本5.3+ 无拓展依赖）
-````shell script
-./md2mcbb [输入文件] [输出文件]
-````
+## Code of Conduct
 
-文件留空或输入 - 解析为使用std
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-可能的方式如下：
+## Security Vulnerabilities
 
-````shell script
-cat README.md | ./md2mcbb > op.txt
-cat README.md | ./md2mcbb - op.txt
-cat README.md | ./md2mcbb
-./md2mcbb README.md > op.txt
-./md2mcbb README.md op.txt
-./md2mcbb README.md
-````
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## 效果怎么样？
+## License
 
-你可以通过下面的页码进行选择，都是使用本markdown使用不同的美化方案实现的
-
-**加粗** *斜体* `下划线` [链接](https://www.mcbbs.net)
-
-- aa
-  - bb
-    - cc
-    - dd
-  - ee
-  - ff
-
-| 加密方式   |                                             建议 |
-| ---------- | ----------------------------------------------- |
-| BCrypt     |        安全性极高，便于迁移到Xenforo等现代化应用 |
-| Plain      |                                         安全性无 |
-
-## 开源协议
-
-Licensed under the MIT
-
-Copyright 2020 Mohist-Community
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

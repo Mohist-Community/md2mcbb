@@ -5,6 +5,9 @@ namespace App\Parser\Extensions;
 use App\Parser\Parser;
 use SplStack;
 
+/**
+ * @author logos
+ */
 class TestParser extends Parser
 {
     protected $iconList = [
